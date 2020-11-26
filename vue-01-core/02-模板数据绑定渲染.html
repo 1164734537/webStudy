@@ -27,6 +27,13 @@
             1.如果输出的内容是html数据，双大括号将数据以普通文本方式进行输出，为了输出真正的HTML效果，就需要使用v-html 指定
             2.为了防止xss 攻击
          -->
+         <h3>4.元素绑定指令 v-bind</h3>
+         <img v-bind:src="imgUrl" alt="">
+         <!-- 这个是简写 -->
+         <img :src="imgUrl" alt="">
+         <h3>5.事件绑定指令 v-on 快捷方式 @</h3>
+         <input type="text" v-model="num">
+         <button @click="add">add</button>
      </div>
 
     <!-- 引入vue.js -->
@@ -39,8 +46,16 @@
                 score: 99,
                 contentHtml:`<span style="color:red">我是红色
                     <script>alert('hello bb')<\/script>
-                    </span>`
-            }
+                    </span>`,
+                imgUrl:'https://cn.vuejs.org/images/logo.png',
+                num:''
+            },
+            methods: {
+                add(){
+                    this.num++; 
+                    console.log('a');
+                }
+            },
         })
     </script>
 </body>

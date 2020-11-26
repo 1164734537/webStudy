@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p><span>数学:</span><input type="text" v-model="matchScore"></p>
+        <p><span>英语:</span><input type="text" v-model="englishScore"></p>
+        <p><span>总分(函数-单向):</span><input type="text" v-model="sumScore()"></p>
+        <p><span>总分(计算属性-单向):</span><input type="text" v-model="sumScore1"></p>
+        <p><span>总分(计算属性-双向):</span><input type="text" v-model="sumScore2"></p>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        /*
+            1.函数没有缓存，每次都会被调用
+            2，计算属性有缓存，只有当计算属性体内的属性被更改之后才会被调用，不然不会被调用
+            3.函数只支持单向
+            4.计算属性默认情况下：只有getter函数，而没有setter函数，所以只支持单向
+                如果要进行双向，则需要自定义setter函数
+        */
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                matchScore:90,
+                englishScore:80,  
+            },
+            methods: {
+                sumScore:function(){
+                    console.log('sumScore函数被调用');
+                    // this 指向的就是 vm实例，减0是为了字符串转为数字运算
+                    return (this.matchScore-0) + (this.englishScore-0);
+                }
+            },
+            computed: {//定义计算属性选项
+                // 这个是单向绑定，默认只有getter方法
+                sumScore1:function(){
+                    console.log('sumScore1函数被调用');
+                    return (this.matchScore-0) + (this.englishScore-0);
+                },
+                sumScore2:{//有了setter和getter之后就可以进行双向数据绑定
+                    // 获取数据
+                    get: function(){
+                        console.log('sumScore2 get');
+                        return (this.matchScore-0) + (this.englishScore-0);
+                    },
+                    // 设置数据
+                    set:function(newValue){
+                        console.log('sumScore2 set');
+                        var avgScore = newValue/2
+                        this.matchScore = avgScore;
+                        this.englishScore = avgScore;
+                    }
+                }
+
+            },
+        })
+    </script>
+</body>
+</html>

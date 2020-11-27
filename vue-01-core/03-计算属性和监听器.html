@@ -9,9 +9,14 @@
     <div id="app">
         <p><span>数学:</span><input type="text" v-model="matchScore"></p>
         <p><span>英语:</span><input type="text" v-model="englishScore"></p>
+        <!-- v-model 调用函数时，不要少了小括号 -->
         <p><span>总分(函数-单向):</span><input type="text" v-model="sumScore()"></p>
+        <!-- 绑定计算属性后面不要加上小括号 -->
         <p><span>总分(计算属性-单向):</span><input type="text" v-model="sumScore1"></p>
         <p><span>总分(计算属性-双向):</span><input type="text" v-model="sumScore2"></p>
+
+        <!-- 通过 watch 选项 监听数学分数，当数学分数更新后回调函数中重新计算总分sumScore3 -->
+        总得分(监听器): <input type="text" v-model="sumScore3">
     </div>
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script>
@@ -21,12 +26,16 @@
             3.函数只支持单向
             4.计算属性默认情况下：只有getter函数，而没有setter函数，所以只支持单向
                 如果要进行双向，则需要自定义setter函数
+            5.监听器 watch
+                1.通过watch 选项 监听数学分数，当数学更新后回调函数中重新计算总分sumScore3
+                2.通过vm.$watch() 选项 监听英语分数， 当英语更新后回调函数中重新计算总分sumScore3
         */
         var vm = new Vue({
             el:'#app',
             data:{
                 matchScore:90,
-                englishScore:80,  
+                englishScore:80,
+                sumScore3:0, //通过监听器，计算出来的总得分
             },
             methods: {
                 sumScore:function(){
@@ -57,6 +66,22 @@
                 }
 
             },
+            // 监听器 通过 watch 选项 监听数学分数，当数学分数更新后回调函数中重新计算总分sumScore3
+            watch: {
+                matchScore: function(newValue,oldValue){
+                    console.log('watch监听器 监听到了数学分数已经更新')
+                    // newValue 是更新后的值，oldValue是更新之前的值
+                  return this.sumScore3 = (newValue-0) +(this.englishScore-0)
+                }
+            },
+
+        })
+        
+        // 监听方式2：通过vm实例进行调用
+        // 第一个参数被监听的属性名，第二个是回调函数
+        vm.$watch('englishScore',function(newValue){
+            // newValue就是更新的英语分数
+            this.sumScore3 = (newValue-0)+(this.matchScore-0)
         })
     </script>
 </body>

@@ -25,6 +25,9 @@
         <p :class="{delete:isDelete,error:isError}">对象表达式</p>
         <!-- 数组形式，用单引号括起来，不需要在data中设置 ，不加单引号就获取data中的值了-->
         <p :class="['active','error']">数组表达式</p>
+
+        <h3>Style绑定，v-bind:style 或 :style</h3>
+        <p :style="{color:activeColor,fontSize:fontsize+'px'}">Style绑定</p>
     </div>
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script>
@@ -33,7 +36,9 @@
             data:{
                 acticeClass:'active',
                 isDelete:true,
-                isError:true
+                isError:true,
+                activeColor:'red',
+                fontsize:20
             }
         })
     </script>

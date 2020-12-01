@@ -6,6 +6,17 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 
+        for..of适用遍历数/数组对象/字符串/map/set等拥有迭代器对象的集合.但是不能遍历对象
+        for in更适合遍历对象，不要使用for in遍历数组
+
+        for in遍历数组的毛病
+            1.index索引为字符串型数字，不能直接进行几何运算
+            2.遍历顺序有可能不是按照实际数组的内部顺序
+            3.使用for in会遍历数组所有的可枚举属性，包括原型。例如上栗的原型方法method和name属性
+            所以for in更适合遍历对象，不要使用for in遍历数组。
+
+     -->
     <div id="app">
         <h3>1.迭代数组</h3>
         <ul> 
@@ -13,7 +24,7 @@
             <!-- 使用key特殊属性，他会基于key的变化重新排列元素的顺序，并且会移除key不存在的元素
                 一般来说key 值 是数据对应的唯一id值
             -->
-            <li v-for="(item,index) in emps">
+            <li v-for="(item,index) of emps" :key="index">
                编号：{{index+1}}, 姓名：{{item.name}}，工资：{{item.salary}}
             </li>
         </ul>

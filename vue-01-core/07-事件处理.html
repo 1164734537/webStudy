@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        完整格式： v-on:事件名="函数名" 或 v-on:事件名="函数名(参数...)"
+        缩写格式：@事件名="函数名" 或 @事件名="函数名(参数....)" 注意：@后面没有冒号
+        event: 函数中的默认形参，代表原生DOM事件
+            当调用的函数，有多个参数传入时，需要使用原生DOM事件，则通过$event作为实参传入
+            作用： 用于监听DOM事件
+      -->
+    <div id="app">
+        <h3>1.事件处理方法 v-on 或 @</h3>
+        <button v-on:click="say">Say {{ msg }}</button>
+        <!-- $event 代表的是原生的 Dom 事件 -->
+        <button @click="wran('hello',$event)">warn</button>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:"bb"
+            },
+            methods: {
+                say: function(event) {
+                    // event 代表的是Dom原生事件，Vie.js它会自动 的将它传入
+                    alert(this.msg)
+                    console.log(event.target.innerHTML)
+                },
+                wran:function(name,event){
+                    alert(name);
+                    // 如果说函数有多个参数，而又需要使用原生事件，则需要使用 $event 作为参数传入
+                    // console.log(name +','+ event)
+                    console.log(event.target.tagName)
+                }
+            },
+        })
+    </script>
+</body>
+</html>

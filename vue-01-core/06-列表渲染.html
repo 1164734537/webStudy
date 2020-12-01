@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3>1.迭代数组</h3>
+        <ul> 
+            <!-- item 是数组 循环输出的 每一项 ,index是数组的索引值-->
+            <!-- 使用key特殊属性，他会基于key的变化重新排列元素的顺序，并且会移除key不存在的元素
+                一般来说key 值 是数据对应的唯一id值
+            -->
+            <li v-for="(item,index) in emps">
+               编号：{{index+1}}, 姓名：{{item.name}}，工资：{{item.salary}}
+            </li>
+        </ul>
+        <h3>2.迭代对象</h3>
+        <ul>
+            <!--
+                    (key = value)这个就是叫键值对
+                     key 就是对象的 属性  
+                     value 就是 属性对应的 属性值，
+                     index 就是对象的第几个属性 因为index 从0开始算起
+            -->
+            <li v-for="(value,key,index) in person">
+                第{{ index + 1 }}个属性值为:{{key}} = {{ value }}
+            </li>
+        </ul>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                emps:[
+                    {name:'马云',salary:'20000'},
+                    {name:'马化腾',salary:'18000'},
+                    {name:'东哥',salary:'13000'},
+                ],
+                person:{
+                    name:'盖伦',
+                    age:'18'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

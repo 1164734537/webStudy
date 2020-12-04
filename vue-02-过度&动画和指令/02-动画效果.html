@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 显示过程中的动画效果 */
+       .bounce-enter-active{
+           animation:bounce-in 10s;
+       } 
+       /* 隐藏过程中的动画效果 */
+       .bounce-leave-active{
+           animation:bounce-in 5s reverse;
+       }
+       /* 动画 */
+       @keyframes bounce-in{
+            0%{
+                /* 持续时长的百分比，比如针对 1s:  0% 代表0s  50% 代表0.5s*/
+                transform: scale(0);
+            }
+
+            50%{
+                transform:scale(1.5);
+            }
+            100%{
+                transform:scale(1);
+            }
+       }
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <button @click="show = !show">放大缩小动画</button>
+        <transition name="bounce">
+            <p v-show="show">年轻人不讲武德啊</p>
+        </transition>
+
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#demo',
+            data:{
+                show:true
+            }
+        })
+    </script>
+</body>
+</html>

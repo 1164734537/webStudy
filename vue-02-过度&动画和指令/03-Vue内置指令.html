@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 将带有v-cloak 属性的标签隐藏*/
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <p>v-html 内容按普通HTML插入，可防止XSS攻击</p>
+    <p>v-show 根据表达式的真假值，切换元素的display CSS属性来显示隐藏元素</p>
+    <p>v-if 根据表达式的真假值，来渲染元素</p>
+    <p>v-else 前面必须有v-if 或v-else-if</p>
+    <p>v-else-if 前面必须有v-if 或 v-else-if</p>
+    <p>v-for 遍历的数组或对象</p>
+    <p>v-on 绑定事件监听器</p>
+    <p>v-bind 用于绑定元素属性</p>
+    <p>v-model 在表单控件或者组件上创建双向数据绑定</p>
+    <p>v-once 一次性叉子，当后面数据更新后视图不会更新</p>
+    <p>v-pre 可以用来显示原始插入值标签{{}}。并跳过这个元素喝它的子元素的编译过程。加快编译。例如：网页中的一篇文章，文章内容不需要被Vue管理渲染，则可以在此元素上添加C-pre忽略文章编译提高</p>
+    <div id="app" v-clock>
+        <!-- v-pre
+            1.用于显示双大括号 {{}}
+            2.跳过这个元素和它的子元素的编译过程，这样可以提高性能。
+        -->
+        <span v-pre>{{ 跳过了 }}</span>
+        <!-- 使用双大括号，会有双括号{{}} 闪烁出来。
+             可以通过 v-text 进行解决闪烁问题
+
+             如果就需要使用双大括号，又不想让它有{{}}闪烁出来
+             v-cloak 来处理
+                1.添加一个属性选择器[v-cloak]的css隐藏样式：
+                [v-cloak]{display:none}
+                2.在被Vue管理的模板是隐藏着的，当Vue解析处理完DOM模板之后，
+                会自动吧这个样式去掉,然后就显示出来
+        -->
+        <h3>{{ message }}</h3>
+        <h3>{{ message }}</h3>
+        <h3>{{ message }}</h3>
+        <h3 v-text="message"></h3>
+        <h3 v-text="message"></h3>
+        <h3 v-text="message"></h3>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                message:'hello bb....'
+            }
+        })
+    </script>
+</body>
+</html>

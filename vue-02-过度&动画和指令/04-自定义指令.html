@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        注册与使用自定义指令方式
+
+        1.注册全局指令 可以在多个vue实例上使用
+        //指令不要带 v-
+        Vue.directive('指令名'，{
+            // el 代表使用了此指令的那个DOM元素
+            //binding 可获取使用了此指令的绑定值 等
+
+            inserted: function(el,binding){
+                //逻辑代码
+            }
+        })
+     -->
+
+     <!-- 
+        注册局部指令 只能在当前实例的vue 中使用
+            directives:{
+                '指令名'：{
+                    //指令不要带v-
+                    inserted(edl,binding){
+                        //逻辑代码
+                    }
+                }
+            }
+
+      -->
+      <!-- 
+
+        使用指令：
+            引用指令时，指令名加上v-
+            直接在元素上使用即可：v-指令='表达式'
+       -->
+
+       <!-- 
+           1.实现输出文本内容全部自动转为大写，字体为红色（功能类似于v-text,但显示内容为大写）
+           2.当页面加载时，该元素将取得焦点（注意：autofocus 在移动版Safari 上不工作）
+        -->
+      <div id="app">
+        <p v-uper-text="message">xxx</p>
+      </div>
+      <div id="app2">
+        自动获取焦点：<input type="text" v-focus>
+      </div>
+      <script src="./node_modules/vue/dist/vue.js"></script>
+      <script>
+          Vue.directive('uper-text',{
+                // el是当前指令作用的那个Dom元素，
+                // binding用于获取使用当前指令的绑定值(value)，表达式(expression)，指令名等
+              
+                // 绑定样式一般不在这个函数中使用
+                // 有 bind （css一般放这里面操作） inserted update 等钩子函数
+
+                // 一般对样式的操作放在 bind 中，bind函数只调用一次
+                bind:function(el){
+                    el.style.color = 'red'
+                },
+                // 一般对js 操作在inserted中，也是只调用一次
+                inserted:function(el,binding){
+                    // 将所有字母文本内容转换为大写
+                    console.log(binding.value.toUpperCase());
+                    console.log(el.innerHTML)
+                    el.innerHTML = binding.value.toUpperCase();
+              }
+          })
+          new Vue({
+              el:'#app',
+              data:{
+                message:'fafafafafafafa'
+              }
+          })
+
+          new Vue({
+              el:'#app2',
+              data:{
+                  message:'wafafafafafa'
+              },
+            // 注册局部自定义指令  
+              directives:{
+                'focus':{//指令名
+                    // 刷新页面自动获取焦点
+                    inserted: function(el,binding){
+                        // 被 v-focus 作用的那个元素在刷新页面后会自动 获取焦点
+                        el.focus()
+                    }
+                }
+              }
+          })
+      </script>
+</body>
+</html>

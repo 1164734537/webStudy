@@ -43,6 +43,7 @@
 									 @keyup.esc="cancelEdit" 
 									 :value="item.content"
 									 @keyup.enter="finishEdit(item,index,$event)"
+									 @blur="ﬁnishEdit(item, index, $event)" 
 							>
 						</li>
 					</ul>

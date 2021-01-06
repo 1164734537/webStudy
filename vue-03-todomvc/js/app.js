@@ -16,6 +16,8 @@
 	const items = [];
 
 	// 注册全局指令
+
+	
 	Vue.directive('app-focus',{
 		inserted:function(el,binding){
 			el.focus()
@@ -47,7 +49,7 @@
 				update(el,binding) {//当指令的值更新后，会调用这个函数
 					// el.focus()
 					// console.log(binding)
-					// console.log(binding.value)
+					console.log(binding.value)
 					if(binding.value){
 						el.focus()
 					}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3>测试过滤器单个参数</h3>
+        <p>{{ content }}</p>
+        <!-- 原始属性名 | 过滤器 -->
+        <p>{{ content| contentFilter}}</p>
+        <input type="text" :value=" content | contentFilter">
+        <h3>测试过滤器多个参数</h3>
+        <p>{{javaScroe | add(vueScroe,pythonScroe)}}</p>
+        <input type="text" :value="javaScroe | add(vueScroe,pythonScroe)">
+    </div>
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // 全局定义过滤器
+    // Vue.filter('contentFilter',function(value){
+    //     if(!value){
+    //         return ''
+    //     }
+    //     return value.toString().toUpperCase().replace('TMD','***').replace('SB','***')
+    // })
+
+
+
+
+    new Vue({
+        el:'#app',
+        data:{
+            content:'小崽子，TMD就是个SB',
+            javaScroe:90,
+            vueScroe:99,
+            pythonScroe:89
+        },
+        filters:{//定义局部 过滤器
+            // contentFilter:function(){ }
+            contentFilter(value){
+                if(!value){
+                    return ''
+                }
+                return value.toString().toUpperCase().replace('TMD','***').replace('SB','***')
+            },
+            add(num1,num2,num3){// add 过滤名, num1 其实急速引用时 | 左边的参数
+                return num1 + num2 + num3
+            }
+        }
+    })
+</script>
+</html>

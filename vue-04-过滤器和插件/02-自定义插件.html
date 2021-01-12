@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p v-my-directive="content"></p>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <!-- 引入插件 -->
+    <script src="./js/plugins.js"></script>
+    <script>
+
+        //1.引入插件MyPlugin,其实就是安装,MyPlugin 插件
+        Vue.use(MyPlugin)
+
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                content:'hello'
+            }
+        })
+        // 调用全局方法，注意是Vue进行调用，不是vm
+        Vue.myGlobalMethod()
+        // 调用插件中的实例方法，注意是vm调用，不是Vue
+        // 注意，不要少了$
+        vm.$myMethod('q33')
+    </script>
+</body>
+</html>

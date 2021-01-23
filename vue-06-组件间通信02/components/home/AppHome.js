@@ -30,6 +30,8 @@
             // 删除爱好
             deleteHobby(index){
               this.hobbies.splice(index,1)
+              // 删除成功，发布消息，导航统计数据
+              PubSub.publish('changeNum',1)
             }
           },
           components:{

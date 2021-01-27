@@ -1,6 +1,6 @@
 (function (Vue) { //表示依赖了全局的Vue
 	 'use strict';
-
+// 
 	var STORAGE_KEY ='items-vuejs';
 	
 	//本地存储数据对象

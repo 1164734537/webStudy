@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+    </div>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+      const vm = new Vue({
+        //   el:"#app",
+          data:{
+              message:'hahaha'
+          },
+          beforeCreate() {
+            //this.$el 和 this.$data
+            console.log('beforeCreate()',this.$el,this.$data)
+          },
+          created(){
+            //   已初始化data数据，但数据未挂载到模板中
+            console.log('created()',this.$el,this.$data)
+          },
+          beforeMount() {
+            //  模板以获取到，但是数据未挂载到模板上
+            console.log('beforeMount()',this.$el,this.$data)
+          },
+          mounted() {
+            //   编译完成，数据已挂载到模板中
+            console.log('mounted()',this.$el,this.$data)
+          },
+          beforeUpdate() {
+            //   当data改变后，去更新模板中的数据前调用
+            // 注意：浏览器问题，需要使用this.$el.innerHTML 获取更新前的Dom 模板数据
+            console.log('beforeUpdate()',this.$el.innerHTML,this.$data)
+          },
+          updated() {
+            //   data 被 Vue 渲染之后的 Dom 数据模板
+            // 查看方式 用实例 vm.message 来更新
+            console.log('beforeMount()',this.$el.innerHTML,this.$data)
+          },
+          beforeDestroy() {
+            //   销毁实例前调用 vm.destroy() 销毁 Vue 实例
+            console.log('beforeDestroy()')
+
+          },
+          destroyed() {
+            console.log('destroyed()')
+          },
+      }).$mount('#app') //实例中未使用el选项，可使用$mount()手动挂载 Dom
+  </script>
+</body>
+</html>

@@ -1,3 +1,5 @@
 {
-    "workbench.activityBar.visible": true
+    "workbench.activityBar.visible": true,
+    "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+    "liveServer.settings.port":8080
 }

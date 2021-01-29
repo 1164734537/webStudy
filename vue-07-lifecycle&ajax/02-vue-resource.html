@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vue-resource</title>
 </head>
+
 <body>
     <div id="app">
         <h1>{{ repData }}</h1>
     </div>
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script src="./node_modules/vue-resource/dist/vue-resource.js"></script>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                repData: []
+            },
+            created() {
+                // GET /someUrl
+                this.$http.get('http://127.0.0.1:8080/vue-07-lifecycle%26ajax/db.json').then(response => {
+                    // 如果要是用Vue實例的this,此處 
+                    this.repData = response.body;
+                    console.log(response.body)
+
+                }, response => {
+                    // error callback
+                    console.log(response.statusText,response.status)
+                });
+            },
+        })
+
+    </script>
 </body>
+
 </html>

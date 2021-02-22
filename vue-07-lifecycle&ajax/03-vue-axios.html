@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ repData }}</h1>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                repData:[]
+            },
+            created() {
+                axios.get('http://127.0.0.1:8080/vue-07-lifecycle%26ajax/db.json')
+                .then(response =>{
+                    console.log(response.data)// 返结果数据
+                    this.repData = response.data
+                })
+                .catch(error=>{
+                    console.log(error.message)
+                })
+            },
+        })
+    </script>
+</body>
+</html>

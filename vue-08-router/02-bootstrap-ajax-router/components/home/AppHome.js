@@ -19,7 +19,7 @@
             }
           },
           created() {
-            axios.get('http://127.0.0.1:8080/vue-07-lifecycle%26ajax/04-bootstrap-ajax/emp.json')
+            axios.get('http://127.0.0.1:8080/vue-08-router/02-bootstrap-ajax-router/emp.json')
             .then(respone =>{
               console.log(respone.data);
               this.empList = respone.data

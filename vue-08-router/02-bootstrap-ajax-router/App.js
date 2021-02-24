@@ -11,6 +11,11 @@
                 <app-home>
                     <h1 slot="dashboard" class="page-header">{{ title }}</h1>
                 </app-home>
+
+                <!--配置路由渲染出口--> 
+                <router-view>
+                    <h1 slot="dashboard" class="page-header">{{ title }}</h1>
+                </router-view>
             </div>
         </div>
     </div>`

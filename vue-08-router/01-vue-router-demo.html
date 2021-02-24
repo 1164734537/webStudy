@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <h1>头部</h1>
+        </div>
+        <div class="left">
+            <p>
+                <ul>
+                    <!-- 方式1：传统方式 -->
+                    <li>
+                        <a href="#/foo"> Go Foo</a>
+                    </li>
+                    <li>
+                        <a href="#/bar">Go Bar</a>
+                    </li>
+                    <!-- 方式2：官方推荐 -->
+                    <!-- <router-link>默认会被渲染成一个`<a>`标签 -->
+                    <!-- 通过传入 to 属性指定跳转链接，不用像上面加 # 号 -->
+                    <li><router-link to="/foo">Go to Foo</router-link></li>
+                    <li><router-link to="/bar">Go to Bar</router-link></li>
+                </ul>
+            </p>
+        </div>
+        <div class="main">
+            <!-- 路由出口：路由匹配到的组件将渲染在这里 -->
+            <router-view></router-view>
+        </div>
+    </div>
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    // 1.定义组件
+    var Foo = {
+        template:'<div>foo 组件</div>'
+    }
+    var Bar = {
+        template:'<div>bar 组件</div>'
+    }
+    // 2.配置路由表： 当点击特定的url 时，显示对应的那个组件。
+    const router = new VueRouter({
+        routes:[//p配置每个路由映射一个组件
+            {path:'/foo',component:Foo},
+            {path:'/bar',component:Bar}
+        ]
+    })
+
+    // 3.注入路由
+
+    new Vue({
+        el:'#app',
+        router //router:router
+    })
+</script>
+</html>

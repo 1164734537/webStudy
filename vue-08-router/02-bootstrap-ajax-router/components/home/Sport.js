@@ -4,14 +4,17 @@
     <div>
         <ul>
             <li v-for="(sport,index) in sportArr" :key="sport.id">
-                <a href="#">{{ sport.title }}</a>
+                <!--
+                     <a href="#">{{ sport.title }}</a>
+                -->
+                <router-link :to="'/news/sport/detail/' + sport.id">
+                    {{ sport.title }}
+                </router-link>
             </li>
         </ul>
-        <!--详情-->
-        <div class="jumbotron">
-            <h2>世界杯开赛啦</h2>
-            <p>世界杯于明晚8点举行开幕式.....</p>
-        </div>
+        <!--详情
+        -->
+        <router-view></router-view>
     </div>`
 
     window.Sport = {

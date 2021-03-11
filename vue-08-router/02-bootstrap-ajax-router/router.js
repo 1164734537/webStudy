@@ -24,7 +24,14 @@
                     },
                     {
                         path:'tech',
-                        component:Tech 
+                        component:Tech,
+                        children:[
+                            {
+                                // 点击栏目标题列表，查看详情
+                                path:'/news/tech/detail/:id',
+                                component: TechDetail
+                            }
+                        ] 
                     },
                     {
                         path:'',
